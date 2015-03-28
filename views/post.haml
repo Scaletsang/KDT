@@ -1,0 +1,12 @@
+-# Title
+- if link
+  %a.post_title{ href: "/post/#{post.id}" }= post.title
+- else
+  %h1.post_title= post.title
+
+-# Date
+- t = Time.at(post.create_time.to_i)
+%h2.date= "#{t.day} . #{t.month} . #{t.year.to_s[2..4]}"
+
+-# Content
+%p= post.html

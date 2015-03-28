@@ -1,0 +1,4 @@
+.entry{ id: "entry-#{post_num}" }
+  %a.item{ href: "/admin/edit-post/#{p.id}" }= p.title
+  %a.item_option{ href: "javascript:;", onclick: "rm_post(\"entry-#{post_num}\",#{p.id})" } delete
+  %a.item_option{ href: "javascript:;", onclick: "toggle_post_access(\"toggle1-#{post_num}\",#{p.id})", id: "toggle1-#{post_num}"}= p.access

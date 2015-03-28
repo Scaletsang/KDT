@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=EDGE"/>
+		<title>KDT Post Editor</title>
+		<meta name="description" content="KDT Post Editor/>
+		<meta property="og:image" content="http://markdown.pioul.fr/images/markdown.png"/>
+
+		<!-- build:css -->
+			<link rel="stylesheet" href="/static/_system/editor/app-shared/css/main.css" type="text/css">
+			<link rel="stylesheet" href="/static/_system/editor/app-shared/css/icons.css" type="text/css">
+		<!-- endbuild -->
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+		<!-- build:js -->
+		<script src="/static/_system/editor/app-shared/js/libs/markdown-it.min.js"></script>
+		<script src="/static/_system/editor/app-shared/js/markdown-it-plugins/markdown-it-map-lines.js"></script>
+		<script src="/static/_system/editor/app-shared/js/utilities.js"></script>
+		<script src="/static/_system/editor/app-shared/js/preview.js"></script>
+		<script src="/static/_system/editor/app-shared/js/main.js"></script>
+		<script src="/static/_system/editor/main.js"></script>
+		<!-- endbuild -->
+	</head>
+	<body class="clearfix">
+		<div id="left-column">
+			<div id="top_panels_container">
+				<div class="top_panel" id="quick-reference">
+					<div class="close">×</div>
+
+					<h2>Quick Reference</h2>
+
+					<table>
+						<tr>
+							<td>
+								<pre><code><span class="highlight">*</span>This is italicized<span class="highlight">*</span>, <wbr/>and <span class="highlight">**</span>this is bold<span class="highlight">**</span>.</code></pre>
+							</td>
+							<td><p>Use <code>*</code> or <code>_</code> for emphasis.</p></td>
+						</tr>
+						<tr>
+							<td>
+								<pre><code><span class="highlight">#</span> This is a first level header</code></pre>
+							</td>
+							<td><p>Use one or more hash marks for headers: <code>#&nbsp;H1</code>, <code>##&nbsp;H2</code>, <code>###&nbsp;H3</code>…</p></td>
+						</tr>
+						<tr>
+							<td>
+								<pre><code>This is a link to <wbr/><span class="highlight">[Google](http://www.google.com)</span></code></pre>
+							</td>
+							<td><p></p></td>
+						</tr>
+						<tr>
+							<td>
+								<pre><code>First line.<span class="highlight">  </span>
+Second line.</code></pre>
+							</td>
+							<td><p>End a line with two spaces for a linebreak.</p></td>
+						</tr>
+						<tr>
+							<td>
+								<pre><code><span class="highlight">- </span>Unordered list item
+<span class="highlight">- </span>Unordered list item</code></pre>
+							</td>
+							<td><p>Unordered (bulleted) lists use asterisks, pluses, or hyphens (<code>*</code>, <code>+</code>, or <code>-</code>) as list markers.</p></td>
+						</tr>
+						<tr>
+							<td>
+								<pre><code><span class="highlight">1. </span>Ordered list item
+<span class="highlight">2. </span>Ordered list item</code></pre>
+							</td>
+							<td><p>Ordered (numbered) lists use regular numbers, followed by periods, as list markers.</p></td>
+						</tr>
+						<tr>
+							<td><pre><code><span class="highlight">    </span>/* This is a code block */</code></pre></td>
+							<td><p>Indent four spaces for a preformatted block.</p></td>
+						</tr>
+						<tr>
+							<td><pre><code>Let's talk about <span class="highlight">`</span>&lt;html&gt;<span class="highlight">`</span>!</code></pre></td>
+							<td><p>Use backticks for inline code.</p></td>
+						</tr>
+						<tr>
+							<td>
+								<pre><code><span class="highlight">![](http://w3.org/Icons/valid-xhtml10)</span></code></pre>
+							</td>
+							<td><p>Images are exactly like links, with an exclamation mark in front of them.</p></td>
+						</tr>
+					</table>
+
+					<p><a href="http://daringfireball.net/projects/markdown/syntax" target="_blank">Full Markdown documentation</a></p>
+				</div>
+				<div class="top_panel" id="about">
+					<div class="close">×</div>
+
+					<h2>About MME</h2>
+
+					<p>Hi, I'm <a href="http://pioul.fr/a-propos/" target="_blank">Philippe Masset</a>.</p>
+					<p>I made the Minimalist Online Markdown Editor because I love Markdown and simple things.<br/>
+						The whole source code is on <a href="https://github.com/pioul/Minimalist-Online-Markdown-Editor" target="_blank">GitHub</a>, and this editor is also available offline and with file support as a <a href="https://chrome.google.com/webstore/detail/minimalist-markdown-edito/pghodfjepegmciihfhdipmimghiakcjf" target="_blank">Chrome app</a>.</p>
+					<p>If you have any suggestions or remarks whatsoever, just click on my name above and you'll have plenty of ways of contacting me.</p>
+
+					<h3>Privacy</h3>
+
+					<ul>
+						<li>No data is sent to any server – everything you type stays inside your browser</li>
+						<li>The editor automatically saves what you write locally for future use.<br/>
+							If using a public computer, either empty the left panel before leaving the editor or use your browser's privacy mode</li>
+					</ul>
+				</div>
+			</div>
+			<div class="wrapper">
+				<div class="topbar hidden-when-fullscreen">
+					<div class="buttons-container clearfix">
+						<a href="javascript:;" class="button toppanel" data-toppanel="quick-reference">Quick Reference</a>
+						<a href="javascript:;" class="button submit" data-toppanel="submit" onclick="submit()">Submit</a>
+						<a href="javascript:;" class="button quick-photos" data-toppanel="quick-photos" onclick="quick_photos()">Quick Photos</a>
+						<a href="javascript:;" class="button icon-fullscreen feature" data-feature="fullscreen" data-tofocus="markdown" title="Go fullscreen"></a>
+					</div>
+					<form class="post-meta-form">
+					  <div class="form-spacer"></div>
+				    Title: <input type="text" name="post-name" class="post-meta-input" id="post-title">
+				    <div class="form-spacer"></div>
+			      Tags: <input type="text" name="tags" class="post-meta-input" id="post-tags">
+			    </form>
+				</div>
+				
+				<textarea id="markdown" class="full-height" placeholder="Write Markdown"></textarea>
+			</div>
+		</div>
+		<div id="right-column">
+			<div class="wrapper">
+				<div class="topbar hidden-when-fullscreen">
+					<div class="buttons-container clearfix">
+						<div class="button-group">
+							<a href="javascript:;" class="button switch" data-switchto="html">HTML</a>
+							<a href="javascript:;" class="button switch" data-switchto="preview">Preview</a>
+						</div>
+						<a href="javascript:;" class="button icon-sync-scroll feature" data-feature="sync-scroll" title="Toggle sync-scrolling (when enabled, the preview panel will automatically scroll with the left panel)"></a>
+						<a href="javascript:;" class="button icon-fullscreen feature" data-feature="fullscreen" data-tofocus="" title="Go fullscreen"></a><!-- data-tofocus is set dynamically by the HTML/preview switch -->
+					</div>
+				</div>
+				<div class="bottom-bar hidden-when-fullscreen clearfix">
+					<div class="word-count"></div>
+				</div>
+				<textarea id="html" class="full-height"></textarea>
+				<div id="preview" class="full-height"></div>
+			</div>
+		</div>
+		<div class="topbar visible-when-fullscreen">
+			<div class="buttons-container clearfix">
+				<div class="button-group">
+					<a href="javascript:;" class="button switch" data-switchto="markdown">Markdown</a>
+					<a href="javascript:;" class="button switch" data-switchto="html">HTML</a>
+					<a href="javascript:;" class="button switch" data-switchto="preview">Preview</a>
+				</div>
+				<a href="javascript:;" class="button icon-fullscreen feature" data-feature="fullscreen" title="Exit fullscreen"></a>
+			</div>
+		</div>
+		<div class="bottom-bar visible-when-fullscreen clearfix">
+			<div class="word-count"></div>
+		</div>
+		<script type="text/javascript">
+		  var _gaq = _gaq || [];
+		  _gaq.push(['_setAccount', 'UA-8885785-17']);
+		  _gaq.push(['_trackPageview']);
+		  (function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		  })();
+		</script>
+		<script type="text/javascript">
+			// If the post already exist this function fills the text areas with the existing data
+			window.onload = (function pre_fill_form() {
+				path = window.location.pathname.split('/');
+				edit_request = "/admin/edit-out/" + path[path.length-1];
+				xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", edit_request, false);
+        xmlHttp.send(null);
+        filler = JSON.parse(xmlHttp.responseText);
+			  document.getElementById("post-title").value = filler.title;
+			  document.getElementById("post-tags").value = filler.tags.replace('+', ' ');
+			  document.getElementById("markdown").value = filler.md;
+			  app.updateMarkdownPreview("", "");
+			});
+			// Escapes JSON incompatible chars
+			function escape_str(str) {
+        return str.replace(/\n/g, '\\n').replace(/\r/g, '\\r').replace(/\t/g, '\\t').replace(/\f/g, '\\f').replace(/"/g, '\\"');
+      }
+			// Sends post to server and redirects back to admin/edit
+		  function submit() {
+				var id = window.location.pathname.split('/')[path.length-1];
+				var title = document.getElementById("post-title").value;
+				var tags = document.getElementById("post-tags").value;
+				var md = document.getElementById("markdown").value;
+				xmlhttp = new XMLHttpRequest();
+				xmlhttp.open("POST", "/admin/edit-in/", true);
+        xmlhttp.send('{"id": "' + id + '", "title": "' + title +'", "tags": "' + tags.replace(' ', '+') + '", "md": "' + escape_str(md) + '"}');
+        window.location.href = "/admin/edit";
+			}
+			// Get list of photos in /static/"dir" then appends them to markdown
+			function quick_photos() {
+				var staticDir = prompt("Directory in /static:", "");
+				xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", ("/admin/qphotos/" + staticDir), false);
+        xmlHttp.send(null);
+        links = JSON.parse(xmlHttp.responseText).join("\n");
+        document.getElementById("markdown").value = document.getElementById("markdown").value + links;
+			}
+		</script>
+	</body>
+</html>

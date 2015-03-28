@@ -1,0 +1,39 @@
+%html
+
+  %head
+    %link{ rel: "stylesheet", href: "/static/_system/css/admin.css" }
+    %script{ src: "/static/_system/menu_scripts.js" }
+
+  %body
+
+    #top_menu
+      %a.top_menu_entry{ href: "/admin/browser", id: "#{where == 'browser' ? 'bottom_line' : nil}" } Files
+      %a.top_menu_entry{ href: "/admin/edit", id: "#{where == 'edit' ? 'bottom_line' : nil}" } Posts
+      %a.top_menu_entry{ href: "/admin/backup", id: "#{where == 'backup' ? 'bottom_line' : nil}" } Backup
+    
+    - if where.nil?
+      %img{ src: "/static/_system/title.png", id: "title_image" }
+
+    - if not where.nil?
+
+      #item_menu
+        
+        - if where == 'browser'
+          .entry
+            %form{ method: "post", enctype: "multipart/form-data", class: "upload" }
+              Upload 
+              %input{ type: "file", name: "files[]", multiple: "" }
+              %input{ type: "submit", class: "sumbit_button" }
+          .entry
+            %a.item{ href: "javascript:;", onclick: "new_dir(\"#{@current_dir}\")" } New Folder
+          %br
+          %br
+  
+        - if where == 'edit'
+          .entry
+            %a.item{ href: "/admin/edit-post/new" } New Post
+          %br
+          %br
+  
+        = entries
+  
