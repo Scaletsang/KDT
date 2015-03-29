@@ -2,7 +2,7 @@ require 'open-uri'
 require 'json'
 require 'fileutils'
 
-site_url = 'http://localhost:3301'
+site_url = 'http://kdt.io'
 
 old_backup = if File.exist?('backup-static-old.json') then
   puts 'Found previous backup index...'

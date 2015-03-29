@@ -6,6 +6,7 @@ admin = Camping::Server.new(:script => 'admin.rb')
 
 #\ -o 0.0.0.0 -p 3301
 
+# for development ease, in production start & manage separately
 spawn 'redis-server redis/redis.conf'
 
 app = Rack::Builder.app do
@@ -20,7 +21,7 @@ app = Rack::Builder.app do
 	  unique = srand.to_s
 	  use Rack::Auth::Digest::MD5, "Admin", unique do |username|
       # This is the admin password
-      # Change it before deployment...
+      # Change it before production...
       'kittens'
     end
 	  run admin

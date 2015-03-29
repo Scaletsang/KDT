@@ -60,7 +60,7 @@ Then you're good to go, let's run this puppy:
 
 Point your browser at `localhost:3301` to see an empty blog.
 
-Ready to fill it up? Head over to `localhost:3301/admin` to access the admin panel (the default login is: username=(whatever you want), password='kittens'). This rest should be fairly obvious.
+Ready to fill it up? Head over to `localhost:3301/admin` to access the admin panel (the default login is: username=(whatever you want), password='kittens'). The rest should be fairly obvious.
 
 The only other thing to remember is to change the port to 80 and the password to something other than 'kittens' in config.ru before production.
 

@@ -1,4 +1,5 @@
 %item
   %title= CGI.escapeHTML(post.title)
   %link= "http://www.kdt.io/post/#{post.id}"
-  %description= CGI.escapeHTML(post.html)
+  %description= "![CDATA[#{CGI.escapeHTML(post.html.gsub('/static', 'http://kdt.io/static'))} ]]"
+  %pubDate= Time.at(post.create_time.to_i).rfc822()
