@@ -102,7 +102,7 @@ module Blog::Controllers
     end
   end
   
-  class RSS < R '/rss'
+  class RSS < R '/rss' # RSS feed
     def get
     
       @rss_entries = @@db
@@ -117,7 +117,7 @@ module Blog::Controllers
     
     end
   end
-	
+
 end
 
 ## Views ##

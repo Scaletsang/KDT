@@ -62,7 +62,7 @@ module Admin::Controllers
       @headers['Content-Type'] = 'application/octet-stream'
       @headers['Content-Transfer-Encoding'] = 'binary'
       
-      return open('redis/dump.rdb','rb') { |f| f.read }
+      return open('../redis/dump.rdb','rb') { |f| f.read }
       
     end
   end
@@ -158,11 +158,11 @@ module Admin::Controllers
     end
   end
   
-  class EditorQuickPhotos < R '/qphotos/(.+)' # replies with list of markdown links to photos in /static/"dir"
+  class EditorQuickPhotos < R '/qphotos/(.+)' # replies with list of markdown links to photos in ../static/"dir"
     def get(dir)
     
 			photoExtensions = ['.jpg', '.webp', '.png', '.gif']
-			dirItems = Dir.entries('static/' + dir) - ['.', '..', '_system']
+			dirItems = Dir.entries('../static/' + dir) - ['.', '..', '_system']
 
 			dirPhotos = dirItems.select do |item|
 			  file_extension = item
@@ -188,8 +188,8 @@ module Admin::Controllers
   class BrowserPanelRoot < R '/browser' # root browser panel
     def get
       
-      paths = (Dir.entries('static')-['.', '..', '_system']).sort
-      is_dirs = paths.collect { |p| Dir.exist?("static/#{p}") }
+      paths = (Dir.entries('../static')-['.', '..', '_system']).sort
+      is_dirs = paths.collect { |p| Dir.exist?("../static/#{p}") }
     
       @entries = paths.zip(is_dirs).collect { |p, d| {:path => p, :is_dir => d} }
       @current_dir = ''
@@ -200,11 +200,11 @@ module Admin::Controllers
     end
   end
   
-  class BrowserPanel < R '/browser/(.+)' # "/static" browser panel
+  class BrowserPanel < R '/browser/(.+)' # "../static" browser panel
     def get(path)
 
-      paths = (Dir.entries("static/#{path}")-['.', '..', '_system']).sort
-      is_dirs = paths.collect { |p| Dir.exist?("static/#{p}") }
+      paths = (Dir.entries("../static/#{path}")-['.', '..', '_system']).sort
+      is_dirs = paths.collect { |p| Dir.exist?("../static/#{p}") }
     
       @entries = paths.zip(is_dirs).collect { |p, d| {:path => p, :is_dir => d} }
       @current_dir = '/' + path
@@ -218,7 +218,7 @@ module Admin::Controllers
 
       @request.params['files'].each do |u_file|
         filename = u_file[:filename].gsub(' ', '_')
-        File.open("static/#{path}/#{filename}", 'wb') do |file|
+        File.open("../static/#{path}/#{filename}", 'wb') do |file|
 			    file.puts u_file[:tempfile].read
 			  end
 			  file_log = Persistence::FileLog.new("static/#{path}/#{filename}", SecureRandom.uuid)
@@ -237,7 +237,7 @@ module Admin::Controllers
       path = json['path']
       puts path
       
-      FileUtils.remove_entry_secure("static/#{path}")
+      FileUtils.remove_entry_secure("../static/#{path}")
       @@file_db.filter_clean("static#{path}")
       
       @body = 'ok'
@@ -253,7 +253,7 @@ module Admin::Controllers
       old_name = json['old_name']
       new_name = json['new_name'].gsub(' ', '_')
       
-      FileUtils.move("static/#{path}/#{old_name}", "static/#{path}/#{new_name}")
+      FileUtils.move("../static/#{path}/#{old_name}", "../static/#{path}/#{new_name}")
       
       @@file_db.drop("static/#{path}/#{old_name}")
       file_log = Persistence::FileLog.new("static/#{path}/#{new_name}", SecureRandom.uuid)
@@ -272,9 +272,9 @@ module Admin::Controllers
       name = json['name'].gsub(' ', '_')
       
       if path == 'null' then
-        Dir.mkdir("static/#{name}")
+        Dir.mkdir("../static/#{name}")
       else 
-        Dir.mkdir("static/#{path}/#{name}")
+        Dir.mkdir("../static/#{path}/#{name}")
       end
 
       @body = 'ok'

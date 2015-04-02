@@ -54,9 +54,18 @@ First install all the gems:
 
     bundler install
 
+Then make sure you have redis installed, use your package manager of choice...
+For debian:
+
+    apt-get install redis-server
+
 Then you're good to go, let's run this puppy:
 
     rackup
+
+Don't forget to also start redis, typically you'd cd up from the repository and run:
+
+    redis-server ./redis/redis.conf
 
 Point your browser at `localhost:3301` to see an empty blog.
 

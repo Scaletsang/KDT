@@ -1,8 +1,10 @@
 %html
 
   %head
-    %link{ rel: "stylesheet", href: "/static/_system/css/admin.css" }
-    %script{ src: "/static/_system/menu_scripts.js" }
+    %meta{ charset: "UTF-8" }
+    %link{ rel: "stylesheet", href: "/system/css/admin.css" }
+    %link{ rel: "icon", href: "/system/favicon.ico" }
+    %script{ src: "/system/menu_scripts.js" }
 
   %body
 
@@ -12,7 +14,7 @@
       %a.top_menu_entry{ href: "/admin/backup", id: "#{where == 'backup' ? 'bottom_line' : nil}" } Backup
     
     - if where.nil?
-      %img{ src: "/static/_system/title.png", id: "title_image" }
+      %img{ src: "/system/title.png", id: "title_image" }
 
     - if not where.nil?
 

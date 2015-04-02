@@ -2,12 +2,14 @@
 
   %head
     %title KDT
-    %link{ rel: "stylesheet", href: "/static/_system/highlight/styles/solarized_dark.css" }
-    %script{ src: "/static/_system/highlight/highlight.pack.js" }
+    %meta{ charset: "UTF-8" }
+    %link{ rel: "stylesheet", href: "/system/highlight/styles/solarized_dark.css" }
+    %link{ rel: "icon", href: "/system/favicon.ico" }
+    %script{ src: "/system/highlight/highlight.pack.js" }
     %script hljs.initHighlightingOnLoad();
-    %script{ src: "/static/_system/processing/processing.min.js" }
-    %script var ADAPT_CONFIG = {path: '/static/_system/css/', dynamic: false, range: ['0px to 1300px = style_small.css','1300px = style.css']};
-    %script{ src: "/static/_system/adapt/adapt.min.js" }
+    %script{ src: "/system/processing/processing.min.js" }
+    %script var ADAPT_CONFIG = {path: '/system/css/', dynamic: false, range: ['0px to 1300px = style_small.css','1300px = style.css']};
+    %script{ src: "/system/adapt/adapt.min.js" }
     
   %body
   
@@ -17,7 +19,7 @@
         %a.more_link{ href: "#{more_link}" } More
     
     .sideBar
-      %img#logo{ src: "/static/_system/KDT.png", alt: "Kunstformen der Technologie" }
+      %img#logo{ src: "/system/KDT.png", alt: "Kunstformen der Technologie" }
       %br
       %a{ href: "/home" } Home
       %br
