@@ -27,7 +27,7 @@ app = Rack::Builder.app do
       # This is the admin password
       # Change it before production...
       
-      File.read '../admin'
+      File.read '../admin.txt'
       
       # And yes, it is stored in a cleartext file called admin.txt
       # May the security gods have mercy on my soul...
