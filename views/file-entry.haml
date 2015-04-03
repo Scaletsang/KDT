@@ -6,4 +6,4 @@
     %a.item{ href: "/static#{current_dir}/#{entry[:path]}" }= entry[:path]
     
   %a.item_option{ href: "javascript:;", onclick: "rm_file(\"entry-#{post_num}\",\"#{current_dir}/#{entry[:path]}\")" } delete
-  %a.item_option{ href: "javascript:;", onclick: "rn_file(\"entry-#{post_num}\",\"#{current_dir}\",\"#{entry}\")" } rename
+  %a.item_option{ href: "javascript:;", onclick: "rn_file(\"entry-#{post_num}\",\"#{current_dir}\",\"#{entry[:path]}\")" } rename
