@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 gem "camping"
-gem "thin"
+gem "unicorn"
 gem "redis"
 gem "kramdown"
 gem "haml"
