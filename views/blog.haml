@@ -13,11 +13,6 @@
     
   %body
   
-    .content
-      = content
-      - if not more_link.nil?
-        %a.more_link{ href: "#{more_link}" } More
-    
     .sideBar
       %img#logo{ src: "/system/KDT.png", alt: "Kunstformen der Technologie" }
       %br
@@ -33,3 +28,8 @@
       %br
       %a{ href: "/tag/art" } Art
       %br
+  
+    .content
+      = content
+      - if not more_link.nil?
+        %a.more_link{ href: "#{more_link}" } More
