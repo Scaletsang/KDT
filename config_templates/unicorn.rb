@@ -1,7 +1,7 @@
 # path to app
 @dir = "##path##"
 
-worker_processes 2
+worker_processes 1
 working_directory @dir
 
 timeout 30
