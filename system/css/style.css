@@ -9,6 +9,7 @@
   line-height:30px;
   border-right: 1px solid #bdc3c7;
   padding-right: 9px;
+  z-index: 2;
 }
 
 .sideBar a {
