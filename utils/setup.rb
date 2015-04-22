@@ -19,6 +19,7 @@ make_if_not_exist 'log'
 File.open('unicorn.rb', 'w') { |f| f << File.read('config_templates/unicorn.rb').gsub('##path##', Dir.pwd) }
 
 # nginx config
+make_if_not_exist 'log/nginx'
 nginx_conf = File.read('config_templates/nginx.conf').gsub('##path##', Dir.pwd).gsub('##static##', File.expand_path('../static'))
-FileUtils.mv '/usr/local/etc/nginx/nginx.conf', '/usr/local/etc/nginx/nginx.conf.backup'
-File.open('/usr/local/etc/nginx/nginx.conf', 'w+') { |f| f << nginx_conf }
+FileUtils.mv '/etc/nginx/nginx.conf', '/etc/nginx/nginx.conf.backup'
+File.open('/etc/nginx/nginx.conf', 'w+') { |f| f << nginx_conf }
