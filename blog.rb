@@ -20,7 +20,22 @@ module Blog::Controllers
   
   class Index < R '/' # root
     def get
-      redirect Home
+      
+      @posts = @@db
+        .all_items
+        .select { |p| p.access == 'public' }
+        .sort_by { |p| p.create_time }
+        .reverse
+        .take 5
+        
+      @with_title_links = true
+      @more_link = if (@posts.length - 5) >= 0
+        then '/home/1'
+        else nil
+      end
+      
+      render :blog
+      
     end
   end
   
