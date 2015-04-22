@@ -6,13 +6,6 @@ admin = Camping::Server.new(:script => 'admin.rb')
 
 #\ -o 0.0.0.0 -p 3301
 
-# manage content directories
-Dir.mkdir('../static') if not Dir.exists? '../static'
-Dir.mkdir('../redis') if not Dir.exists? '../redis'
-File.open('../redis/redis.conf', 'w') { |f| f << File.read('redis.conf') } if not File.exists? '../redis/redis.conf'
-File.open('../admin.txt', 'w') { |f| f << 'kittens' } if not File.exists? '../admin.txt'
-
-
 app = Rack::Builder.app do
 
   use Rack::Static, :urls => ["/system"]
