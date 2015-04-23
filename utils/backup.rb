@@ -32,14 +32,18 @@ end
   
 
 new_file_list.each do |path, uuid|
-  if not old_uuids.include?(uuid) then
-    puts "Downloading: #{path}..."
-    path_create(path)
-    file_name = path.split('/').last
-	  open(path, 'wb') do |f|
-      f << open("#{site_url}/#{path}").read
+  begin
+    if not old_uuids.include?(uuid) then
+      puts "Downloading: #{path}..."
+      path_create(path)
+      file_name = path.split('/').last
+      open(path, 'wb') do |f|
+        f << open("#{site_url}/#{path}").read
+      end
     end
-	end
+  rescue StandardError
+    puts "Backing up file: #{path}, failed..."
+  end
 end
 
 puts 'Renaming backup index...'
