@@ -132,6 +132,18 @@ module Blog::Controllers
     
     end
   end
+  
+  class StaticPage < R '/~/([^/]+)'
+    def get(page_name)
+      
+      if File.exists?("../static/#{page_name}/index.html") then
+        File.read("../static/#{page_name}/index.html")
+      else
+        render :_404
+      end
+      
+    end
+  end
 
 end
 

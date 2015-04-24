@@ -37,20 +37,32 @@ other stuff
 
 ./views contains all the HAML templates
 
-./static contains web accessible resources
-
-./static/_system is where all the blog specific content and style-sheets are stored
-
-./redis houses the redis config file and persistent database file (dump.rdb)
+./system is where all the blog specific content and style-sheets are stored
 
 ./config.ru is the Rack config file
 
-./utils contains the lone script backup.rb, which can be used with the backup functionality in admin.rb to maintain a backup of the static files
+./config_templates contains, you guessed it, config file templates
+
+./utils contains the scripts for setting up and maintaining the blog
 
 Where's the On Switch?
 ======================
 
-First install all the gems:
+The application is meant to sit in a containing folder where the site content lives (this makes updating easier). To get started create a folder called `app` (or whatever you'd like...), and cd to it.
+
+    mkdir ~/app
+    cd ~/app
+
+Next grab the application.
+
+    git clone https://github.com/henrystanley/kdt
+
+Now we'll set up the content directories and config files
+
+    cd kdt
+    ruby ./utils/setup.rb
+
+Then install all the gems:
 
     bundler install
 
@@ -59,7 +71,7 @@ For debian:
 
     apt-get install redis-server
 
-Then you're good to go, let's run this puppy:
+Now you're good to go, let's run this puppy:
 
     rackup
 
@@ -72,6 +84,14 @@ Point your browser at `localhost:3301` to see an empty blog.
 Ready to fill it up? Head over to `localhost:3301/admin` to access the admin panel (the default login is: username=(whatever you want), password='kittens'). The rest should be fairly obvious.
 
 The only other thing to remember is to change the port to 80 and the password to something other than 'kittens' in config.ru before production.
+
+After realizing how slow the site was by default I setup a (hopefully) simple way to use nginx with unicorn. The setup script *should* create config files for this, so all you *should* have to do is install nginx (`apt-get install nginx`) and run it like this:
+ 
+    unicorn -c unicorn.rb -D
+    nginx
+
+If that doesn't work, good luck, you're on your own...
+
 
 Can I Use This Project, In Part or in Whole?
 ============================================
