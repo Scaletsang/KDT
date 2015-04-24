@@ -112,7 +112,7 @@ Second line.</code></pre>
 				<div class="topbar hidden-when-fullscreen">
 					<div class="buttons-container clearfix">
 						<a href="javascript:;" class="button toppanel" data-toppanel="quick-reference">Quick Reference</a>
-						<a href="javascript:;" class="button submit" data-toppanel="submit" onclick="submit()">Submit</a>
+						<a href="javascript:;" class="button submit" data-toppanel="submit" onclick="submit(true)">Submit</a>
 						<a href="javascript:;" class="button quick-photos" data-toppanel="quick-photos" onclick="quick_photos()">Quick Photos</a>
 						<a href="javascript:;" class="button icon-fullscreen feature" data-feature="fullscreen" data-tofocus="markdown" title="Go fullscreen"></a>
 					</div>
@@ -187,8 +187,8 @@ Second line.</code></pre>
 			function escape_str(str) {
         return str.replace(/\n/g, '\\n').replace(/\r/g, '\\r').replace(/\t/g, '\\t').replace(/\f/g, '\\f').replace(/"/g, '\\"');
       }
-			// Sends post to server and redirects back to admin/edit
-		  function submit() {
+			// Sends post to server and if 'redirect' is true: redirects back to admin/edit
+		  function submit(redirect) {
 				var id = window.location.pathname.split('/')[path.length-1];
 				var title = document.getElementById("post-title").value;
 				var tags = document.getElementById("post-tags").value;
@@ -196,7 +196,7 @@ Second line.</code></pre>
 				xmlhttp = new XMLHttpRequest();
 				xmlhttp.open("POST", "/admin/edit-in/", true);
         xmlhttp.send('{"id": "' + id + '", "title": "' + title +'", "tags": "' + tags.replace(' ', '+') + '", "md": "' + escape_str(md) + '"}');
-        window.location.href = "/admin/edit";
+        if (redirect) {window.location.href = "/admin/edit";}
 			}
 			// Get list of photos in /static/"dir" then appends them to markdown
 			function quick_photos() {
@@ -207,6 +207,17 @@ Second line.</code></pre>
         links = JSON.parse(xmlHttp.responseText).join("\n");
         document.getElementById("markdown").value = document.getElementById("markdown").value + links;
 			}
+      // jquery key action to submit if ctrl+s is pressed
+      $(window).bind('keydown', function(event) {
+        if (event.ctrlKey || event.metaKey) {
+          switch (String.fromCharCode(event.which).toLowerCase()) {
+            case 's':
+              event.preventDefault();
+              submit(false);
+              break;
+          }
+        }
+    });
 		</script>
 	</body>
 </html>
