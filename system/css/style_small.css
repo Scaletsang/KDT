@@ -121,3 +121,10 @@ canvas:focus {
   font-size: 22px;
   width: 700px;
 }
+
+#about_link {
+  font-family: 'Rokkitt', serif;
+  font-size: 22px;
+  text-decoration: none;
+  font-style: normal;
+}
