@@ -78,6 +78,17 @@ canvas:focus {
   color: #a2a2a2;
 }
 
+.content h2 {
+  font-size: 1.3em;
+  font-weight: bold;
+  display: block;
+  text-decoration: none;
+  text-align: center;
+  font-family: 'Lora', serif;
+  color: #8b8b8b;
+  font-style: normal !important;
+}
+
 .content img {
   width: 100%;
   height: auto;
